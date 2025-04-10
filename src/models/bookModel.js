@@ -1,29 +1,56 @@
 import prisma from "../../prisma/client.js";
 
-class TarefaModel {
+class BookModel {
   getAll = async () => {
-    return await prisma.task.findMany();
-  };
-
-  create = async (descricao) => {
-    return await prisma.task.create({
-      data: {
-        descricao,
-      },
-    });
-  };
-
-  update = async (id, concluida, descricao) => {
     try {
-      const tarefa = await prisma.task.update({
+      return await prisma.book.findMany();
+    } catch (error) {
+      console.log("Erro ao buscar livros", error);
+      throw error;
+    }
+  };
+  getById = async (id) => {
+    try {
+      const livro = await prisma.book.findUnique({
+        where: { id },
+      });
+      return livro;
+    }
+    catch (error) {
+      console.log("Erro ao encontrar livro", error);
+      throw error;
+    }
+  }
+
+  
+    createNewBook = async (title, author, publisher, isbn, category, year, description) => {
+      return await prisma.book.create({
+        data: {
+          title,
+          author,
+          publisher,
+          isbn,
+          category,
+          year,
+          description,
+        },
+      });
+    };
+
+  update = async (id, title, author, publisher, isbn, category) => {
+    try {
+      const livro = await prisma.book.update({
         where: { id },
         data: {
-          concluida: concluida !== undefined ? concluida : true,
-          descricao,
+          title,
+          author,
+          publisher,
+          isbn,
+          category,
         },
       });
 
-      return tarefa;
+      return livro;
     } catch (error) {
       console.log("Error", error);
       throw error;
@@ -32,15 +59,41 @@ class TarefaModel {
 
   delete = async (id) => {
     try {
-      const tarefaDeletada = await prisma.task.delete({
+      const livroDeletado = await prisma.book.delete({
         where: { id },
       });
 
-      return tarefaDeletada;
+
+      return livroDeletado;
     } catch (error) {
-      console.log("Erro ao deletar a tarefa!", error);
+      console.log("Erro ao deletar a livro!", error);
+      throw error;
+    }
+    z
+  };
+
+  createdAt = async (id) => {
+    try {
+      const livro = await prisma.book.findUnique({
+        where: { id },
+      });
+      return livro.createdAt;
+    } catch (error) {
+      console.log("Erro ao encontrar livro", error);
+      throw error;
+    }
+  };
+  
+  updatedAt = async (id) => {
+    try {
+      const livro = await prisma.book.findUnique({
+        where: { id },
+      });
+      return livro.updatedAt;
+    } catch (error) {
+      console.log("Erro ao encontrar livro", error);
       throw error;
     }
   };
 }
-export default new TarefaModel();
+export default new BookModel();
