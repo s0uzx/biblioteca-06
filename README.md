@@ -114,10 +114,14 @@ Exemplo de requisição:
 
 ## **Decisões de Design e Arquitetura**
 #Estrutura MVC: O projeto segue o padrão Model-View-Controller para organizar o código.
+
 #Prisma ORM: Utilizado para interagir com o banco de dados de forma eficiente e segura.
+
 #Express.js: Framework utilizado para criar a API de forma rápida e modular.
+
 #Tratamento de Erros: Implementado tratamento de erros em cada camada para garantir respostas consistentes.
-#Tecnologias Utilizadas
+
+## **Tecnologias Utilizadas**
 #Node.js: Ambiente de execução para JavaScript.
 #Express.js: Framework para criação de APIs.
 #Prisma: ORM para gerenciamento do banco de dados.
